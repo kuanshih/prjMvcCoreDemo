@@ -5,8 +5,14 @@ using prjMvcCoreDemo.ViewModels;
 
 namespace prjMvcCoreDemo.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : SuperController
     {
+        private IWebHostEnvironment _enviro = null;
+
+        public ProductController(IWebHostEnvironment p)
+        {
+            _enviro = p;
+        }
         public IActionResult List(CKeywordViewModel vm)
         {
             DbDemoContext cxt = new DbDemoContext();
@@ -54,15 +60,26 @@ namespace prjMvcCoreDemo.Controllers
             TProduct prod = ctx.TProducts.FirstOrDefault(p => p.FId == id);
             if (prod == null)
                 return RedirectToAction("List");
-            return View(prod);
+            CProductWrap prodWrap = new CProductWrap();
+            prodWrap.product = prod;
+            return View(prodWrap);
         }
         [HttpPost]
-        public IActionResult Edit(TProduct pln)
+        public IActionResult Edit(CProductWrap pln)
         {
             DbDemoContext ctx = new DbDemoContext();
             TProduct prod = ctx.TProducts.FirstOrDefault(p => p.FId == pln.FId);
             if (prod != null)
             {
+                if(pln.photo != null)
+                {
+                    string photoName = Guid.NewGuid().ToString() + ".jpg"; //Guid建立亂數，可避免存放進去的照片出現相同的檔名
+                    prod.FImagePath = photoName; //放到我們資料庫中ImagePath 做為路徑
+                    //這段則是mvcCore最大的不同，改使用CopyTo(),裡面再用FileStream(照片的路徑, 如果找不到就新增)
+                    pln.photo.CopyTo(new FileStream(
+                        _enviro.WebRootPath + "/images/" + photoName, FileMode.Create));//WebRootPath 可以幫我們導到wwwroot
+                }
+
                 prod.FName = pln.FName;
                 prod.FQty = pln.FQty;
                 prod.FPrice = pln.FPrice;

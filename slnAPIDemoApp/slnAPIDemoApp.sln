@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prjAPIDemoApp", "prjAPIDemoApp\prjAPIDemoApp.csproj", "{37755078-2476-4153-A223-64D8FC1E0F33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37755078-2476-4153-A223-64D8FC1E0F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37755078-2476-4153-A223-64D8FC1E0F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37755078-2476-4153-A223-64D8FC1E0F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37755078-2476-4153-A223-64D8FC1E0F33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC5B6BEF-6292-4E56-8E7E-2BDD520D6F7E}
+	EndGlobalSection
+EndGlobal

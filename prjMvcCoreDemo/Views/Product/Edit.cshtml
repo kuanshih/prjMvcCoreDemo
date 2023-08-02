@@ -1,4 +1,4 @@
-﻿@model prjMvcCoreDemo.Models.TProduct
+﻿@model prjMvcCoreDemo.Models.CProductWrap
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" name="FId" value="@Model.FId" />
             <div class="form-group">
@@ -34,9 +34,8 @@
                 <span asp-validation-for="FPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FImagePath" class="control-label"></label>
-                <input asp-for="FImagePath" class="form-control" />
-                <span asp-validation-for="FImagePath" class="text-danger"></span>
+                產品照片
+                <input type="file" name="photo"class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="儲存並送出" class="btn btn-secondary" />

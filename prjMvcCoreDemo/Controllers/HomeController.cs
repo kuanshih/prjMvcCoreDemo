@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+//using Newtonsoft.Json;
 using prjMvcCoreDemo.Models;
+using prjMvcCoreDemo.ViewModels;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace prjMvcCoreDemo.Controllers
 {
@@ -12,10 +15,29 @@ namespace prjMvcCoreDemo.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult Login()
+        {
+        return View();
+        }
+        [HttpPost]
+        public IActionResult Login(CLoginViewModel vm)
+        {
+            TCustomer user =(new DbDemoContext()).TCustomers.FirstOrDefault(
+                t=>t.FEmail.Equals(vm.txtAccount)&&t.FPassword.Equals(vm.txtPassword));
+            if(user !=null && user.FPassword.Equals(vm.txtPassword))
+            {
+                string json = JsonSerializer.Serialize(user);
+                HttpContext.Session.SetString(CDictionary.SK_LOGINED_USER, json);
+                return RedirectToAction("index");
+            }
+            return View();
+        }
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.Keys.Contains(CDictionary.SK_LOGINED_USER))
+                return View();
+
+            return RedirectToAction("Login");
         }
 
         public IActionResult Privacy()

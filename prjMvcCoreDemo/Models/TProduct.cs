@@ -16,5 +16,6 @@ public partial class TProduct
     [DisplayName("商品單價")]
     public decimal? FPrice { get; set; }
 
+    [DisplayName("產品照片")]
     public string? FImagePath { get; set; }
 }

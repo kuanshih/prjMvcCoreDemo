@@ -35,6 +35,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FImagePath)
+@*                @Html.DisplayNameFor(model => model.photo)*@
             </th>
             <th></th>
         </tr>
@@ -61,7 +62,8 @@
                 @Html.DisplayFor(modelItem => item.FPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FImagePath)
+                
+                        <img src="images/@item.FImagePath"  width="240" height="180" />"
             </td>
             <td>
                         @Html.ActionLink("修改", "Edit","Product", new { id=item.FId  }, new { @class = "btn btn-light" })
